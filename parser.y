@@ -38,6 +38,7 @@ ClassDeclaration
 ClassBodyDeclaration
     :   ClassBodyDeclaration MethodDeclaration
     |   MethodDeclaration
+    |   VarDeclarations
     ;
 
 MethodDeclaration
@@ -55,6 +56,16 @@ ParameterDeclaration
     :   %empty
     |   ParameterDeclaration ',' Type IDENTIFIER
     |   Type IDENTIFIER
+    ;
+
+VarDeclarations
+    :   VarDeclarations VarDeclaration
+    |   VarDeclaration
+    ;
+
+VarDeclaration
+    :   Type IDENTIFIER ASSIGN_OP EXPR ';'
+    |   Type Identifier ';'
     ;
 
 Body
@@ -118,43 +129,47 @@ OptionalArgumentList
     ;
 
 EXPR
-    :   Identifier EQ INTEGER   {
+    :   Identifier EQ Identifier   {
             printf("EQUALS\n");
         }
-    |   Identifier NOT_EQ INTEGER   {
+    |   Identifier NOT_EQ Identifier   {
             printf("NOT EQUALS\n");
         }
-    |   Identifier LT INTEGER   {
+    |   Identifier LT Identifier   {
             printf("LESS THAN\n");
         }
-    |   Identifier LTE INTEGER   {
+    |   Identifier LTE Identifier   {
             printf("LESS THAN EQUALS\n");
         }
-    |   Identifier GT INTEGER   {
+    |   Identifier GT Identifier   {
             printf("GREATER THAN\n");
         }
-    |   Identifier GTE INTEGER   {
+    |   Identifier GTE Identifier   {
             printf("GREATER THAN EQUALS\n");
         }
-    |   Identifier ADD_OP INTEGER   {
+    |   Identifier ADD_OP Identifier   {
             printf("ADD\n");
         }
-    |   Identifier MIN_OP INTEGER   {
+    |   Identifier MIN_OP Identifier   {
             printf("MINUS\n");
         }
-    |   Identifier MUL_OP INTEGER   {
+    |   Identifier MUL_OP Identifier   {
             printf("MULTIPLY\n");
         }
-    |   Identifier DIV_OP INTEGER   {
+    |   Identifier DIV_OP Identifier   {
             printf("DIVIDE\n");
         }
     |   Identifier
     ;
 Type
+    :   PrimitiveType
+    |   PrimitiveType '[' ']'
+    ;
+
+PrimitiveType
     :   INT
     |   BOOLEAN
     |   STRING
-    ;
 
 Identifier 
     :   IDENTIFIER
