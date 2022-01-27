@@ -6,6 +6,11 @@ class Name {
         int a = Name.getInt(5);
         while(a == 2){
             System.out.println(5);
+            if(a == 2){
+                System.out.println(2);
+            }else{
+                System.out.println(5);
+            }
         }
     }
 }
