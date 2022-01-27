@@ -12,3 +12,4 @@ clean:
 	rm -f mylang
 	rm -f lex.yy.*
 	rm -f parser.tab.*
+	rm -f parser.output

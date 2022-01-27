@@ -22,7 +22,10 @@ class Name2 {
             int inside_else_if = 0;
         } else if{
             int inside_else_if_again;
-        } else {
+        } 
+        else if{
+            
+        }else {
             int inside_else;
         }
     }

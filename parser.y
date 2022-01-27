@@ -60,6 +60,11 @@ Body
     |   Statement
     ;
 
+OptionalBody  
+    :   Body
+    |   %empty
+    ;
+
 Statement
     :   Type IDENTIFIER ASSIGN_OP EXPR ';' {
             printf("Declare Var W Value\n");   
@@ -81,32 +86,27 @@ Statement
     ;
 
 IfStatement 
-    :   IF '(' EXPR ')' '{' OptionalStatement '}' {
+    :   IF '(' EXPR ')' '{' OptionalBody '}' {
             printf("IF\n");
         }
-    |   IF '(' EXPR ')' '{' OptionalStatement '}' ELSE '{' OptionalStatement '}' {
+    |   IF '(' EXPR ')' '{' OptionalBody '}' ELSE '{' OptionalBody '}' {
             printf("IF-ELSE\n");
         }
-    |   IF '(' EXPR ')' '{' OptionalStatement '}' ElseIf {
+    |   IF '(' EXPR ')' '{' OptionalBody '}' ElseIf {
             printf("IF-ELSEIF\n");
         }
-    |   IF '(' EXPR ')' '{' OptionalStatement '}' ElseIf ELSE '{' OptionalStatement '}' {
+    |   IF '(' EXPR ')' '{' OptionalBody '}' ElseIf ELSE '{' OptionalBody '}' {
             printf("IF-ELSEIF-ELSE\n");
         }
     ;
 
 ElseIf 
-    :   ElseIf ELSE IF '{' OptionalStatement '}' ELSE '{' OptionalStatement '}'
-    |   ELSE IF '{' OptionalStatement '}' 
+    :   ElseIf ELSE IF '{' OptionalBody '}' ELSE '{' OptionalBody '}'
+    |   ELSE IF '{' OptionalBody '}' 
     ;
 
 WhileStatement
-    :   WHILE '(' EXPR ')' '{' OptionalStatement '}'
-    ;
-
-OptionalStatement  
-    :   Body
-    |   %empty 
+    :   WHILE '(' EXPR ')' '{' OptionalBody '}'
     ;
 
 EXPR
