@@ -3,21 +3,26 @@ class Name {
     int b = 0;
     int[] b;
     public string getString(string s1, string s2){
-        Name2.getInt(5);
+        int a = Name.getInt(5);
+        while(a == 2){
+            System.out.println(5);
+        }
     }
 }
 
 class Name2 {
+    int[] b;
     public int getInt(int a){
         int b = 2;
-        if(b == 2){
+        if(this.getInt() == 2){
             int inside_if = 0;
             int abc = 0;
+            int abc = 3 + 2 * 5;
         } 
         else if {
             int inside_else_if = 0;
         } else if{
-            int inside_else_if_again;
+            this.setValue(5);
         }else {
             int inside_else;
         }

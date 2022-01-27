@@ -6,7 +6,7 @@ lex.yy.c: lexer.l parser.tab.c
 	flex lexer.l
 
 parser.tab.c: parser.y
-	bison -vdtk --report=solved parser.y
+	bison -vdtk --report=lookahead parser.y
 
 clean:
 	rm -f mylang

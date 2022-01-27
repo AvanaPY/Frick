@@ -19,7 +19,7 @@
 "else"          { return ELSE; }
 "while"         { return WHILE; }
 
-"println"       { return PRINTLN; }
+"System.out.println" { return PRINTLN; }
 
 "="             {return ASSIGN_OP; }
 "+"             {return ADD_OP; }
@@ -34,8 +34,10 @@
 "<="            { return LTE; }
 ">="            { return GTE; }
 
-[a-zA-Z_]+[0-9]* { printf("IDENTIFIER %s\n", yytext); return IDENTIFIER; }
-0|[1-9][0-9]*   { printf("INTEGER    %s\n", yytext); return INTEGER;}
+"."             { return DOT; }
+
+[a-zA-Z_]+[0-9]* { return IDENTIFIER; }
+0|[1-9][0-9]*   { return INTEGER;}
 
 .               { return yytext[0]; }
 %%

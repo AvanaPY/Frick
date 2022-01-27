@@ -4,17 +4,28 @@
 %}
 
 %token CLASS_TOK
-%token PUBLIC PRIVATE
-%token INT BOOLEAN STRING
-%token IF ELSE WHILE
-%token PRINTLN
-%token ASSIGN_OP ADD_OP MIN_OP MUL_OP DIV_OP
-%token EQ NOT_EQ LT GT LTE GTE 
-%token INTEGER 
-%token IDENTIFIER
 
-%precedence IF ELSE
-%precedence INT BOOLEAN STRING 
+%token PUBLIC PRIVATE
+
+%token INT BOOLEAN STRING
+
+%token IF ELSE WHILE
+
+
+%token ASSIGN_OP ADD_OP MIN_OP MUL_OP DIV_OP
+
+%token EQ NOT_EQ LT GT LTE GTE 
+
+%token IDENTIFIER INTEGER
+
+%token PRINTLN
+%token THIS "this"
+%token DOT 
+
+%left ADD_OP MIN_OP
+%left MUL_OP DIV_OP
+
+%left DOT ASSIGN_OP EQ NOT_EQ LT GT LTE GTE
 %%
 
 START   
@@ -59,8 +70,12 @@ ParameterDeclaration
     ;
 
 VarDeclarations
-    :   VarDeclarations VarDeclaration
-    |   VarDeclaration
+    :   VarDeclarations VarDeclaration{
+            printf("Class var Declaration\n");
+        }
+    |   VarDeclaration{
+            printf("Class var Declaration\n");
+        }
     ;
 
 VarDeclaration
@@ -94,9 +109,9 @@ Statement
             printf("While\n");
         }
     |   PRINTLN '(' EXPR ')' ';' {
-            printf("PRINTLN\n");
+            printf("System.out.println\n");
         }
-    |   IDENTIFIER '.' IDENTIFIER '(' OptionalArgumentList ')' ';'
+    |   EXPR ';'
     ;
 
 IfStatement 
@@ -126,40 +141,46 @@ WhileStatement
 OptionalArgumentList
     :   OptionalArgumentList ',' EXPR
     |   EXPR
+    |   %empty
     ;
 
 EXPR
-    :   Identifier EQ Identifier   {
+    :   EXPR EQ EXPR   {
             printf("EQUALS\n");
         }
-    |   Identifier NOT_EQ Identifier   {
+    |   EXPR NOT_EQ EXPR   {
             printf("NOT EQUALS\n");
         }
-    |   Identifier LT Identifier   {
+    |   EXPR LT EXPR   {
             printf("LESS THAN\n");
         }
-    |   Identifier LTE Identifier   {
+    |   EXPR LTE EXPR   {
             printf("LESS THAN EQUALS\n");
         }
-    |   Identifier GT Identifier   {
+    |   EXPR GT EXPR   {
             printf("GREATER THAN\n");
         }
-    |   Identifier GTE Identifier   {
+    |   EXPR GTE EXPR   {
             printf("GREATER THAN EQUALS\n");
         }
-    |   Identifier ADD_OP Identifier   {
+    |   EXPR ADD_OP EXPR   {
             printf("ADD\n");
         }
-    |   Identifier MIN_OP Identifier   {
+    |   EXPR MIN_OP EXPR   {
             printf("MINUS\n");
         }
-    |   Identifier MUL_OP Identifier   {
+    |   EXPR MUL_OP EXPR   {
             printf("MULTIPLY\n");
         }
-    |   Identifier DIV_OP Identifier   {
+    |   EXPR DIV_OP EXPR   {
             printf("DIVIDE\n");
         }
     |   Identifier
+    |   INTEGER
+    |   "this"
+    |   EXPR DOT IDENTIFIER '(' OptionalArgumentList ')' {
+            printf("Function call\n");
+        }
     ;
 Type
     :   PrimitiveType
@@ -170,9 +191,9 @@ PrimitiveType
     :   INT
     |   BOOLEAN
     |   STRING
+    ;
 
 Identifier 
     :   IDENTIFIER
-    |   INTEGER
     ;
 %%
