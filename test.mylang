@@ -1,0 +1,29 @@
+class Name {
+    public string getString(string s){
+        int b = 0;
+        while(4 != 2) {
+            println(yeet);
+            if(4 == 2){
+                println(4 == 2);
+            }
+        }
+        b = 4;
+    }
+}
+
+class Name2 {
+    public int getInt(int a){
+        int b = 2;
+        if(b == 2){
+            int inside_if = 0;
+            int abc = 0;
+        } 
+        else if {
+            int inside_else_if = 0;
+        } else if{
+            int inside_else_if_again;
+        } else {
+            int inside_else;
+        }
+    }
+}
