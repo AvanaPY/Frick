@@ -1,13 +1,6 @@
 class Name {
-    public string getString(string s){
-        int b = 0;
-        while(4 != 2) {
-            println(yeet);
-            if(4 == 2){
-                println(4 == 2);
-            }
-        }
-        b = 4;
+    public string getString(string s1, string s2){
+        Name2.getInt(5);
     }
 }
 
@@ -22,11 +15,11 @@ class Name2 {
             int inside_else_if = 0;
         } else if{
             int inside_else_if_again;
-        } 
-        else if{
-            
         }else {
             int inside_else;
         }
+    }
+    public int a(){
+        int b = 0;
     }
 }

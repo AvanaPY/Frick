@@ -14,7 +14,7 @@
 %token IDENTIFIER
 
 %precedence IF ELSE
-%precedence INT BOOLEAN STRING
+%precedence INT BOOLEAN STRING 
 %%
 
 START   
@@ -30,22 +30,24 @@ ClassDeclaration
     :   CLASS_TOK IDENTIFIER '{' ClassBodyDeclaration '}' {
             printf("Class Body\n");
         }
+    |   CLASS_TOK IDENTIFIER '{' '}' {
+            printf("Class Body\n");
+        }
     ;
 
 ClassBodyDeclaration
-    :   MethodDeclaration
+    :   ClassBodyDeclaration MethodDeclaration
+    |   MethodDeclaration
     ;
 
 MethodDeclaration
-    :   MethodAccessibility Type IDENTIFIER '(' ParameterDeclaration ')' '{' Body '}' {
+    :   MethodAccessibility Type IDENTIFIER '(' ParameterDeclaration ')' '{' OptionalBody '}' {
             printf("Method\n");
         }
-    |   %empty
     ;
 
 MethodAccessibility
-    :   %empty
-    |   PUBLIC
+    :   PUBLIC
     |   PRIVATE
     ;
 
@@ -83,6 +85,7 @@ Statement
     |   PRINTLN '(' EXPR ')' ';' {
             printf("PRINTLN\n");
         }
+    |   IDENTIFIER '.' IDENTIFIER '(' OptionalArgumentList ')' ';'
     ;
 
 IfStatement 
@@ -107,6 +110,11 @@ ElseIf
 
 WhileStatement
     :   WHILE '(' EXPR ')' '{' OptionalBody '}'
+    ;
+
+OptionalArgumentList
+    :   OptionalArgumentList ',' EXPR
+    |   EXPR
     ;
 
 EXPR
