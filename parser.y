@@ -130,7 +130,7 @@ IfStatement
     ;
 
 ElseIf 
-    :   ElseIf ELSE IF '{' OptionalBody '}' ELSE '{' OptionalBody '}'
+    :   ElseIf ELSE IF '{' OptionalBody '}'
     |   ELSE IF '{' OptionalBody '}' 
     ;
 
